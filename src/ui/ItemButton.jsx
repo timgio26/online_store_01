@@ -33,7 +33,7 @@ export function ItemButton({ data }) {
           </button>
         </div>
       ) : (
-        <div className="flex flex-row justify-between items-center w-full justify-around text-white">
+        <div className="flex flex-row items-center w-full justify-around text-white">
           <button className="bg-primary-400 w-10 h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handleMin}>-</button>
           <span className="text-gray-800">{cart[0].qty}</span>
           <button className="bg-primary-400 w-10 h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handlePlus}>+</button>

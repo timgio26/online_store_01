@@ -17,12 +17,14 @@ export function Catalog() {
   const {
     isLoading,
     isPending,
-    data: db_produk,
+    data={},
     error,
   } = useQuery({
     queryKey: ["product", sortBy],
     queryFn: () => GetData({ sortBy }),
   });
+
+  const {data:db_produk=[],count=0}= data
 
   return (
     // <div className="flex flex-row h-svh overflow-y-auto">
@@ -40,7 +42,7 @@ export function Catalog() {
             <h1>Loading</h1>
           )}
         </div>
-        <Paginate/>
+        <Paginate count={count}/>
       </div>
     </>
 

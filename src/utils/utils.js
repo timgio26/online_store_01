@@ -49,7 +49,7 @@ export async function GetData({sortBy}) {
   console.log(sortBy)
   const [col,how]=sortBy?sortBy.split("-"):["",""]
   // console.log(col,how)
-  let q=supabase.from("db_produk").select("*");
+  let q=supabase.from("db_produk").select("*", { count: 'exact', head: false });
 
   if(col&&how){
     q=q.order(col,{ ascending: how==="asc" })
@@ -57,12 +57,13 @@ export async function GetData({sortBy}) {
   }
 
 
-  const { data, error } = await q
+  const { data=[], error ,count} = await q
   if (error) {
     console.error(error);
     throw new Error("items cant be loaded");
   }
-  return data;
+  console.log('count=',count)
+  return {count,data};
 }
 
 export async function GetDataItem(id) {
@@ -90,3 +91,5 @@ export function prettynum(num) {
       .join("")
   );
 }
+
+export const DATA_PER_PAGE =20
