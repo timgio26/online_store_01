@@ -4,7 +4,7 @@ import { prettynum } from "../utils/utils";
 export function ItemCard({ data }) {
   // console.log(each)
   return (
-    <div className="mx-5 my-3 w-52 h-72 flex flex-col justify-between items-center">
+    <div className="mx-5 my-3 w-40 h-64 flex flex-col justify-between items-center">
       <div className="flex justify-center items-center h-24 w-full border-primary-300 border">
         <img
           src={data.img_url}
@@ -13,14 +13,14 @@ export function ItemCard({ data }) {
         />
       </div>
       <div className="flex flex-col w-full">
-        <div className="text-lg font-bold text-gray-800 w-full">
+        <div className="font-bold text-gray-800 w-full text-sm">
           {data.product_name}
         </div>
         <div className="w-full">
-          <div className="text-gray-600 line-through">
+          <div className="text-gray-600 line-through text-xs">
             {prettynum(data.product_price)}
           </div>
-          <div className="text-green-600 text-2xl font-semibold">
+          <div className="text-green-600 text-base font-semibold">
             {prettynum(data.product_price - data.discount_price)}
           </div>
         </div>

@@ -18,7 +18,7 @@ export function CartItemCard({ dataEach }) {
 
   return (
     <div className={`flex flex-row items-center p-4 border-b border-gray-300 ${isLoading&&'blur-md'}`}>
-      <div className="w-20 h-20 flex-shrink-0">
+      <div className="w-16 h-16 flex-shrink-0">
         <img
           src={data.img_url}
           alt={data.product_name}
@@ -26,11 +26,11 @@ export function CartItemCard({ dataEach }) {
         />
       </div>
       <div className="ml-4 flex-grow">
-        <p className="font-semibold text-lg">{data.product_name}</p>
-        <p className="text-gray-600">
+        <p className="font-semibold text-sm">{data.product_name}</p>
+        <p className="text-gray-600 text-sm">
           {dataEach.qty} x {prettynum(data.product_price - data.discount_price)}
         </p>
-        <p className="font-semibold text-green-600">
+        <p className="font-semibold text-green-600 text-sm">
           {prettynum(dataEach.qty * (data.product_price - data.discount_price))}
         </p>
       </div>

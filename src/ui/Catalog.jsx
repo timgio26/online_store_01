@@ -27,7 +27,7 @@ export function Catalog() {
   return (
     // <div className="flex flex-row h-svh overflow-y-auto">
     <>
-      <div className="bg-primary-200 flex flex-col justify-between w-96">
+      <div className="bg-primary-200 flex flex-col justify-between w-72">
         <Sidecart />
         <BasicModal />
       </div>
