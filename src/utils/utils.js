@@ -1,9 +1,13 @@
 import { faker } from "@faker-js/faker";
 import { createClient } from "@supabase/supabase-js";
 
+// import {DATA_PER_PAGE} from '../utils/utils'
+
 const supabaseUrl = "https://dzanjlfmchzdirukrrlt.supabase.co";
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+export const DATA_PER_PAGE =20
 
 export async function Feeddata() {
   const prodname = faker.commerce.productName();
@@ -45,8 +49,8 @@ export async function Feeddata() {
   return { data };
 }
 
-export async function GetData({sortBy}) {
-  console.log(sortBy)
+export async function GetData({sortBy,page=null}) {
+
   const [col,how]=sortBy?sortBy.split("-"):["",""]
   // console.log(col,how)
   let q=supabase.from("db_produk").select("*", { count: 'exact', head: false });
@@ -54,6 +58,11 @@ export async function GetData({sortBy}) {
   if(col&&how){
     q=q.order(col,{ ascending: how==="asc" })
     // console.log(col,how)
+  }
+  if(page){
+    q=q.range((page-1)*DATA_PER_PAGE, page*DATA_PER_PAGE-1)
+  } else {
+    q=q.range(0,DATA_PER_PAGE-1)
   }
 
 
@@ -92,4 +101,4 @@ export function prettynum(num) {
   );
 }
 
-export const DATA_PER_PAGE =20
+

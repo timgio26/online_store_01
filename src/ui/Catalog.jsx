@@ -13,16 +13,14 @@ import { Paginate } from "./Paginate";
 export function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get("sortBy");
+  const page = searchParams.get("page");
   // console.log(sortBy)
-  const {
-    isLoading,
-    isPending,
-    data={},
-    error,
-  } = useQuery({
-    queryKey: ["product", sortBy],
-    queryFn: () => GetData({ sortBy }),
+  const {isLoading,isPending,data={},error,} = useQuery({
+    queryKey: ["product", sortBy,page],
+    queryFn: () => GetData({ sortBy,page}),
   });
+
+  console.log(data)
 
   const {data:db_produk=[],count=0}= data
 
@@ -42,7 +40,8 @@ export function Catalog() {
             <h1>Loading</h1>
           )}
         </div>
-        <Paginate count={count}/>
+        {!isLoading && <Paginate count={count}/>}
+        
       </div>
     </>
 
