@@ -8,7 +8,7 @@ export function Sidecart() {
   const data = useSelector(getCart);
   // console.log(data.length);
   return (
-      <div className={'bg-primary-200 overflow-scroll h-full transition-opacity duration-500 ease-in-out'}>
+      <div className={'bg-primary-200 overflow-scroll h-full transition-opacity duration-500 ease-in-out no-scrollbar'}>
         {data.map((each) => (
           <CartItemCard key={each.itemid} dataEach={each} />
         ))}
