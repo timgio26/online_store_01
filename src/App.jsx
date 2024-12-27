@@ -12,7 +12,7 @@ import store from "./store";
 
 import { AppLayout } from "./ui/AppLayout";
 import { Catalog } from "./ui/Catalog";
-import { About } from "./pages/about";
+import { About } from "./pages/About";
 
 const queryClient = new QueryClient({
   defaultOptions: {
