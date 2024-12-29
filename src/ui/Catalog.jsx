@@ -7,6 +7,7 @@ import { ItemCard } from "./ItemCard";
 import { BasicModal } from "./Modals";
 import { Sort } from "./Sort";
 import { Paginate } from "./Paginate";
+import { useMemo } from "react";
 
 //Projectandi26!
 
@@ -20,9 +21,13 @@ export function Catalog() {
     queryFn: () => GetData({ sortBy,page}),
   });
 
-  console.log(data)
+  // console.log(data)
 
   const {data:db_produk=[],count=0}= data
+
+  const db_produk_memo = useMemo(()=>db_produk,[db_produk])
+
+
 
   return (
     // <div className="flex flex-row h-svh overflow-y-auto">
@@ -35,7 +40,7 @@ export function Catalog() {
         <Sort />
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           {!isLoading ? (
-            db_produk.map((each) => <ItemCard key={each.id} data={each} />)
+            db_produk_memo.map((each) => <ItemCard key={each.id} data={each} />)
           ) : (
             <h1>Loading</h1>
           )}

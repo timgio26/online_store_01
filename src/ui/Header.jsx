@@ -8,7 +8,7 @@ export function Header() {
           alt="Shop Logo"
           className="h-10 w-10 mr-3"
         />
-        <span className="text-white text-2xl font-bold">Shop Name</span>{" "}
+        <span className="text-white text-2xl font-bold">Timeless Treasures</span>{" "}
       </div>{" "}
       <ul className="flex space-x-4 text-white">
         <li>
