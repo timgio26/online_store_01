@@ -8,7 +8,7 @@ export function CartItemCard({ dataEach }) {
   const dispatch = useDispatch();
 
   const {isLoading,isPending,data={},error} = useQuery({
-    queryKey: ['productEach',dataEach],
+    queryKey: ['productEach',dataEach.itemid],
     queryFn: () => GetDataItem(dataEach.itemid),
   });
 
