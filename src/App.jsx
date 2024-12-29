@@ -34,7 +34,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<AppLayout />}>
-              <Route path="" element={<Catalog/>}/>
+              <Route path="/" element={<Catalog/>}/>
               <Route path="/about" element={<About/>}/>
             </Route>
           </Routes>
