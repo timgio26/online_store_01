@@ -1,11 +1,9 @@
 import { faker } from "@faker-js/faker";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabase";
 
 // import {DATA_PER_PAGE} from '../utils/utils'
 
-const supabaseUrl = "https://dzanjlfmchzdirukrrlt.supabase.co";
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey);
+
 
 export const DATA_PER_PAGE =20
 
@@ -95,6 +93,19 @@ export async function PostOrder(orderUserData) {
   }
   return { data, error };
 }
+
+export async function UpdateOrder(column, value, dataUpdate) {
+  console.log(column)
+  console.log(value,)
+  console.log(dataUpdate)
+  const { data, error } = await supabase
+    .from("db_order")
+    .update(dataUpdate)
+    .eq(column, value)
+    .select();
+  return { data, error };
+}
+
 
 export function prettynum(num) {
   return (

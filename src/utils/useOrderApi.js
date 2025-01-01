@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
-import { PostOrder as PostOrderApi } from "./utils";
+import { PostOrder as PostOrderApi , UpdateOrder as UpdateOrderApi} from "./utils";
 
 export function usePostOrderUser(){
     const {mutate:postOrder,isPending}= useMutation({
         mutationFn:PostOrderApi,
-        onSuccess:(data)=>{
-            console.log('user order data create',data)
+        onSuccess:()=>{
+            console.log('user order data create')
             
         },
         onError:()=>{
@@ -13,4 +13,17 @@ export function usePostOrderUser(){
         },
     })
     return {postOrder,isPending}
+}
+
+export function useUpdate(){
+    const {mutate:updateOrder,isPending}= useMutation({
+        mutationFn:({column,value,dataUpdate})=>UpdateOrderApi(column,value,dataUpdate),
+        onSuccess:()=>{
+            console.log('user order data updated')  
+        },
+        onError:()=>{
+            console.log('fail update order user data')
+        },
+    })
+    return {updateOrder,isPending}
 }

@@ -4,8 +4,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { useForm } from "react-hook-form";
 import { getCart, getCartValue } from "../store";
 import { useSelector } from "react-redux";
-import { usePostOrderUser } from "../utils/useOrderApi";
-import { useNavigate, useNavigation } from "react-router"
+import { usePostOrderUser, useUpdate } from "../utils/useOrderApi";
+import { useNavigate, useNavigation } from "react-router";
 
 export function CheckoutForm({ handleClose }) {
   const [openMap, setOpenMap] = useState(false);
@@ -17,9 +17,10 @@ export function CheckoutForm({ handleClose }) {
     formState: { errors },
   } = useForm();
 
-  const cartVal = useSelector(getCartValue)
-  const {postOrder,isPending} = usePostOrderUser()
-  const navigate = useNavigate()
+  const cartVal = useSelector(getCartValue);
+  const { postOrder, isPending } = usePostOrderUser();
+  const navigate = useNavigate();
+  const { updateOrder, isPending: isUpdating } = useUpdate();
 
   function MapClick() {
     useMapEvents({
@@ -37,13 +38,24 @@ export function CheckoutForm({ handleClose }) {
 
   function onSubmit(formData) {
     // console.log(cartVal)
-    postOrder({...formData,amount:cartVal},{onSuccess:()=>{
-      navigate('/order/123')
-    }})
+    postOrder(
+      { ...formData, amount: cartVal, coordinate: latlng },
+      {
+        onSuccess: ({ data }) => {
+          const oriId = data[0].id;
+          const genId = `#${"0".repeat(10 - String(oriId).length)}${oriId}`;
+          updateOrder({
+            column: "id",
+            value: data[0].id,
+            dataUpdate: { "order#": genId },
+          });
+
+          navigate(`/order/${oriId}`);
+        },
+      }
+    );
     // console.log(formData,cartData)
   }
-
-//   console.log(errors);
 
   return (
     <form action="" className="w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -62,7 +74,9 @@ export function CheckoutForm({ handleClose }) {
           className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
         {errors.name?.type === "required" && (
-          <p className="text-red-600 text-xs" role="alert">Name is required</p>
+          <p className="text-red-600 text-xs" role="alert">
+            Name is required
+          </p>
         )}
       </div>
       <div className="mb-2">
@@ -79,8 +93,10 @@ export function CheckoutForm({ handleClose }) {
           {...register("email", { required: true })}
           className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
-                {errors.email?.type === "required" && (
-          <p className="text-red-600 text-xs" role="alert">Email is required</p>
+        {errors.email?.type === "required" && (
+          <p className="text-red-600 text-xs" role="alert">
+            Email is required
+          </p>
         )}
       </div>
       <div className="mb-2">
@@ -98,12 +114,14 @@ export function CheckoutForm({ handleClose }) {
             minLength: 5,
             maxLength: 12,
             pattern: /^\d+$/,
-            required:true
+            required: true,
           })}
           className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
         />
-              {errors.phone?.type === "required" && (
-          <p className="text-red-600 text-xs" role="alert">Phone is required</p>
+        {errors.phone?.type === "required" && (
+          <p className="text-red-600 text-xs" role="alert">
+            Phone is required
+          </p>
         )}
       </div>
 
@@ -122,9 +140,11 @@ export function CheckoutForm({ handleClose }) {
               {...register("address", { required: true })}
               className="w-full px-3 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
             ></textarea>
-                          {errors.address?.type === "required" && (
-          <p className="text-red-600 text-xs" role="alert">Address is required</p>
-        )}
+            {errors.address?.type === "required" && (
+              <p className="text-red-600 text-xs" role="alert">
+                Address is required
+              </p>
+            )}
             <div
               onClick={() => setOpenMap(true)}
               className="mb-5 mt-2 flex flex-row items-center justify-center rounded-full px-4 py-1 bg-primary-400 text-white shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
