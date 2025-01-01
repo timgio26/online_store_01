@@ -84,7 +84,17 @@ export async function GetDataItem(id) {
   return data[0];
 }
 
-
+export async function PostOrder(orderUserData) {
+  const { data, error } = await supabase
+    .from("db_order")
+    .insert([orderUserData])
+    .select();
+  if (error) {
+    console.error(error);
+    throw new Error("cant create order");
+  }
+  return { data, error };
+}
 
 export function prettynum(num) {
   return (

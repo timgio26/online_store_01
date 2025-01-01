@@ -35,6 +35,10 @@ export const getCart = (state) => {
   return state.cart;
 };
 
+export const getCartValue = (state) => {
+  return state.cart.reduce((acum,curr)=>acum+(curr.qty*curr.unitPrice),0);
+};
+
 ////store
 
 const store = configureStore({

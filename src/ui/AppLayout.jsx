@@ -8,7 +8,7 @@ export function AppLayout() {
 
       <Header />
 
-      <main className="flex flex-row h-svh overflow-y-auto">
+      <main className="flex flex-row h-svh overflow-y-auto ">
         <Outlet />
       </main>
     </div>
