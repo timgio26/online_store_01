@@ -8,6 +8,7 @@ import { BasicModal } from "./Modals";
 import { Sort } from "./Sort";
 import { Paginate } from "./Paginate";
 import { useMemo } from "react";
+import { LoadingContainer } from "./LoadingContainer";
 
 //Projectandi26!
 
@@ -42,7 +43,7 @@ export function Catalog() {
           {!isLoading ? (
             db_produk_memo.map((each) => <ItemCard key={each.id} data={each} />)
           ) : (
-            <h1>Loading</h1>
+            <LoadingContainer/>
           )}
         </div>
         {!isLoading && <Paginate count={count}/>}

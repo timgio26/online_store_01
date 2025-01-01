@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import { PostOrder as PostOrderApi , UpdateOrder as UpdateOrderApi} from "./utils";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { GetOrder, PostOrder as PostOrderApi , UpdateOrder as UpdateOrderApi} from "./utils";
 
 export function usePostOrderUser(){
     const {mutate:postOrder,isPending}= useMutation({
@@ -26,4 +26,12 @@ export function useUpdate(){
         },
     })
     return {updateOrder,isPending}
+}
+
+export function useGetOrder(id){
+    const {isLoading,data,error} = useQuery({
+        queryFn:()=>GetOrder(id),
+        queryKey:['order']
+    })
+    return {isLoading,data,error}
 }

@@ -106,6 +106,17 @@ export async function UpdateOrder(column, value, dataUpdate) {
   return { data, error };
 }
 
+export async function GetOrder(id){
+  // console.log(id)
+  let { data, error } = await supabase.from("db_order").select("*").eq("id", id);
+  if (error) {
+    console.error(error);
+    throw new Error("this item cant be loaded");
+  }
+  console.log(data)
+  return data[0];
+}
+
 
 export function prettynum(num) {
   return (
