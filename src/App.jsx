@@ -13,6 +13,7 @@ import store from "./store";
 import { AppLayout } from "./ui/AppLayout";
 import { Catalog } from "./ui/Catalog";
 import { About } from "./pages/About";
+import { OrderDetails } from "./pages/OrderDetails";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ function App() {
             <Route element={<AppLayout />}>
               <Route path="/" element={<Catalog/>}/>
               <Route path="/about" element={<About/>}/>
+              <Route path="/order/:id" element={<OrderDetails/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

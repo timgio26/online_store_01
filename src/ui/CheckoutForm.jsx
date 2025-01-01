@@ -4,6 +4,8 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { useForm } from "react-hook-form";
 import { getCart, getCartValue } from "../store";
 import { useSelector } from "react-redux";
+import { usePostOrderUser } from "../utils/useOrderApi";
+import { useNavigate, useNavigation } from "react-router"
 
 export function CheckoutForm({ handleClose }) {
   const [openMap, setOpenMap] = useState(false);
@@ -16,6 +18,8 @@ export function CheckoutForm({ handleClose }) {
   } = useForm();
 
   const cartVal = useSelector(getCartValue)
+  const {postOrder,isPending} = usePostOrderUser()
+  const navigate = useNavigate()
 
   function MapClick() {
     useMapEvents({
@@ -31,8 +35,11 @@ export function CheckoutForm({ handleClose }) {
     return null;
   }
 
-  async function onSubmit(formData) {
-    console.log(cartVal)
+  function onSubmit(formData) {
+    // console.log(cartVal)
+    postOrder({...formData,amount:cartVal},{onSuccess:()=>{
+      navigate('/order/123')
+    }})
     // console.log(formData,cartData)
   }
 
