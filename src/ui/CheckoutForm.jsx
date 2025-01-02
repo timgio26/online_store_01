@@ -50,7 +50,7 @@ export function CheckoutForm({ handleClose }) {
             dataUpdate: { "order#": genId },
           });
 
-          navigate(`/order/${oriId}`);
+          navigate('/order',{ state: { newId: oriId }});
         },
       }
     );

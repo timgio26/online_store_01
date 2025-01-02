@@ -2,12 +2,16 @@ import { useParams } from "react-router";
 import { useGetOrder } from "../utils/useOrderApi";
 import { prettynum } from "../utils/utils";
 import { LoadingContainer } from "../ui/LoadingContainer";
+import { useLocation } from 'react-router-dom';
 
 export function OrderDetails() {
-  const params = useParams();
-  const { id } = params;
+  const {state:{newId}} = useLocation()
+  // console.log(newId)
 
-  const { isLoading, data, error } = useGetOrder(id);
+  // const params = useParams();
+  // const { id } = params;
+
+  const { isLoading, data, error } = useGetOrder(newId);
 
   const {
     amount,

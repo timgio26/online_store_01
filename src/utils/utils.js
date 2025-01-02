@@ -113,7 +113,7 @@ export async function GetOrder(id){
     console.error(error);
     throw new Error("this item cant be loaded");
   }
-  console.log(data)
+  // console.log(data)
   return data[0];
 }
 
