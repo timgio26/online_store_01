@@ -4,7 +4,7 @@ import { prettynum } from "../utils/utils";
 export function ItemCard({ data }) {
   // console.log(each)
   return (
-    <div className="mx-5 my-3 w-40 h-64 flex flex-col justify-between items-center">
+    <div className="mx-5 my-3 md:w-40 flex flex-col justify-between items-center">
       <div className="flex justify-center items-center h-24 w-full border-primary-300 border">
         <img
           src={data.img_url}
@@ -17,7 +17,7 @@ export function ItemCard({ data }) {
           {data.product_name}
         </div>
         <div className="w-full">
-          <div className="text-gray-600 line-through text-xs">
+          <div className="text-gray-600 line-through text-[10px] md:text-xs">
             {prettynum(data.product_price)}
           </div>
           <div className="text-green-600 text-base font-semibold">
@@ -30,7 +30,7 @@ export function ItemCard({ data }) {
             <span className="text-yellow-500 text-lg">
               {"★".repeat(data.product_rating)}
             </span>
-            <span className="text-gray-500 text-sm ml-2">
+            <span className="hidden md:block text-gray-500 text-sm ml-2">
               ({data.product_rating})
             </span>
           </div>

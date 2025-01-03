@@ -6,11 +6,11 @@ export function Header() {
         <img
           src="https://via.placeholder.com/40"
           alt="Shop Logo"
-          className="h-10 w-10 mr-3"
+          className="h-7 w-7 md:h-10 md:w-10 mr-3"
         />
-        <span className="text-white text-2xl font-bold">Timeless Treasures</span>{" "}
+        <span className="text-white text-sm md:text-2xl font-bold">Timeless Treasures</span>{" "}
       </div>{" "}
-      <ul className="flex space-x-4 text-white">
+      <ul className="hidden md:flex space-x-4 text-white">
         <li>
           <Link to="/" className="hover:text-gray-300">
             Home
@@ -32,6 +32,8 @@ export function Header() {
           </a>
         </li>
       </ul>
+
+
     </nav>
   );
 }

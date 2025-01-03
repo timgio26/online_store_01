@@ -27,16 +27,16 @@ export function ItemButton({ data }) {
         <div className="flex w-full">
           <button
             onClick={handlefristadd}
-            className="bg-primary-400 w-full py-1 rounded-3xl text-white h-[40px] hover:bg-primary-500 transition-colors"
+            className="bg-primary-400 w-full py-1 rounded-3xl text-white h-8 md:h-10 hover:bg-primary-500 transition-colors"
           >
             Add To Cart
           </button>
         </div>
       ) : (
         <div className="flex flex-row items-center w-full justify-around text-white">
-          <button className="bg-primary-400 w-10 h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handleMin}>-</button>
+          <button className="bg-primary-400 w-8 md:w-10 h-8 md:h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handleMin}>-</button>
           <span className="text-gray-800">{cart[0].qty}</span>
-          <button className="bg-primary-400 w-10 h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handlePlus}>+</button>
+          <button className="bg-primary-400 w-8 md:w-10 h-8 md:h-10 rounded-full hover:bg-primary-500 transition-colors" onClick={handlePlus}>+</button>
         </div>
       )}
     </>

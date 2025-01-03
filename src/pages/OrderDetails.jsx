@@ -3,6 +3,7 @@ import { useGetOrder } from "../utils/useOrderApi";
 import { prettynum } from "../utils/utils";
 import { LoadingContainer } from "../ui/LoadingContainer";
 import { useLocation } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 
 export function OrderDetails() {
   const {state:{newId}} = useLocation()
@@ -25,6 +26,9 @@ export function OrderDetails() {
   } = data || {};
 
   const date = new Date(created_at);
+  const {lat,lng}= coordinate || {}
+
+  console.log(data)
   //
   if (isLoading) return <LoadingContainer />;
   if(error) return <h1>There is an Error</h1>
@@ -32,8 +36,8 @@ export function OrderDetails() {
     <div className="w-full p-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6">Order {orderNumber}</h1>
 
-      <div className="flex flex-row">
-        <div className="bg-white p-4 shadow-md rounded-md w-2/6">
+      <div className="flex flex-col md:flex-row">
+        <div className="bg-white p-4 shadow-md rounded-md w-full md:w-2/6">
           <div>
             {/* <div className="mb-4 flex justify-between">
               <div className="font-semibold">Status:</div>
@@ -65,7 +69,18 @@ export function OrderDetails() {
             </div>
           </div>
         </div>
-        <div className="mt-8">mapcomponent</div>
+        <div className="px-5 w-full md:w-3/6 aspect-square md:aspect-auto">
+          <MapContainer
+            className="h-full w-full rounded-md"
+            center={[lat, lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {/* <MapClick /> */}
+            {lat && <Marker position={{lat,lng}} />}
+          </MapContainer>
+        </div>
       </div>
     </div>
   );

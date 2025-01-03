@@ -14,6 +14,7 @@ import { AppLayout } from "./ui/AppLayout";
 import { Catalog } from "./ui/Catalog";
 import { About } from "./pages/About";
 import { OrderDetails } from "./pages/OrderDetails";
+import { Playground } from "./pages/Playground";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ function App() {
               <Route path="/" element={<Catalog/>}/>
               <Route path="/about" element={<About/>}/>
               <Route path="/order" element={<OrderDetails/>}/>
+              <Route path="/playground" element={<Playground/>}/>
             </Route>
           </Routes>
         </BrowserRouter>
