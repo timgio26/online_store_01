@@ -11,7 +11,7 @@ const contents = [
 export function CardSlider(){
     return(
         <div className="container px-5">
-            <div className="flex flex-row gap-4 p-2">
+            <div className="flex flex-row gap-4 overflow-x-scroll">
                 {contents.map((each,index)=><ImageCard key={index} title={each.title} subtitle={each.subtitle}/>)}
             </div>
         </div>

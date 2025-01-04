@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 
 export function Jumbotron() {
   return (
-    <div className="flex h-screen justify-center items-center">
-      <div className="flex flex-col w-3/5 justify-center">
+    <div className="h-svh flex flex-col px-2 justify-center">
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="text-8xl font-bold"
+          className="text-6xl md:text-8xl font-bold"
         >
           Welcome to Timeless Treasures
         </motion.h1>
@@ -36,7 +35,6 @@ export function Jumbotron() {
             </Link>
           </button>
         </motion.div>
-      </div>
     </div>
   );
 }

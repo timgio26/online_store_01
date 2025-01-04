@@ -5,19 +5,19 @@ import { Jumbotron } from "./Jumbotron";
 
 export function About() {
   return (
-    <div className="font-serif text-center text-slate-800">
+    <div className="w-svw font-serif text-center text-slate-800 overflow-x-hidden">
       <Jumbotron/>
 
 
       <InViewAnimate>
-        <div className="flex flex-row h-1/2 py-8 px-5">
-          <div className="w-1/2 overflow-hidden p-4">
+        <div className="flex flex-col md:flex-row h-1/2 py-8 px-5">
+          <div className="md:w-1/2 overflow-hidden md:p-4 rounded-md">
             <img
               src="https://dzanjlfmchzdirukrrlt.supabase.co/storage/v1/object/public/image/storefront.jpeg"
               alt=""
             />
           </div>
-          <div className="flex flex-col w-1/2 text-left align-middle justify-center">
+          <div className="flex flex-col md:w-1/2 text-left align-middle justify-center">
             <h3 className="font-bold text-lg">About Us</h3>
             <p>
               At Timeless Treasures, we have been passionate about preserving
@@ -33,7 +33,7 @@ export function About() {
         </div>
       </InViewAnimate>
 
-      <CardSlider/>
+      <CardSlider/> 
 
       {/* <h3>Our Commitment to Authenticity</h3>
       <p>
