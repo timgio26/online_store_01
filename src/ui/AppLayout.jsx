@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { Catalog } from "./Catalog";
 import { Header } from "./Header";
 import { MobileFooter } from "./MobileFooter";
 

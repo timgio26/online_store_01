@@ -16,6 +16,7 @@ import { About } from "./pages/About";
 import { OrderDetails } from "./pages/OrderDetails";
 import { Playground } from "./pages/Playground";
 import { FindOrder } from "./pages/FindOrder";
+import { MyCart } from "./pages/MyCart";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ function App() {
               <Route path="/order" element={<OrderDetails/>}/>
               <Route path="/findorder" element={<FindOrder/>}/>
               <Route path="/playground" element={<Playground/>}/>
+              <Route path="/mycart" element={<MyCart/>}/>
             </Route>
           </Routes>
         </BrowserRouter>
