@@ -5,11 +5,11 @@ export function ItemCard({ data }) {
   // console.log(each)
   return (
     <div className="mx-5 my-3 md:w-40 flex flex-col justify-between items-center">
-      <div className="flex justify-center items-center h-24 w-full border-primary-300 border">
+      <div className="flex justify-center items-center h-24 w-full border-primary-300 border overflow-hidden rounded-sm">
         <img
           src={data.img_url}
           alt=""
-          className="h-full w-auto object-contain"
+          className="w-full h-full object-cover hover:scale-105 transition ease-in-out delay-75 duration-300"
         />
       </div>
       <div className="flex flex-col w-full">
