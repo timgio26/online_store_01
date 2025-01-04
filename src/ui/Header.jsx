@@ -27,9 +27,9 @@ export function Header() {
           </Link>
         </li>
         <li>
-          <a href="/contact" className="hover:text-gray-300">
-            Contact
-          </a>
+          <Link to="/findorder" className="hover:text-gray-300">
+            My Order
+          </Link>
         </li>
       </ul>
 

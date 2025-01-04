@@ -117,6 +117,18 @@ export async function GetOrder(id){
   return data[0];
 }
 
+export async function GetOrder2(id){
+  // console.log(id)
+  const col = "order#"
+  let { data, error } = await supabase.from("db_order").select("*").eq(`"${col}"`, id);
+  if (error) {
+    console.error(error);
+    throw new Error("this item cant be loaded");
+  }
+  // console.log(data)
+  return data[0];
+}
+
 
 export function prettynum(num) {
   return (
@@ -131,6 +143,11 @@ export function prettynum(num) {
       .reverse()
       .join("")
   );
+}
+
+export function isNumber(input){
+  const regex = /^\d+$/; 
+  return regex.test(input); 
 }
 
 
