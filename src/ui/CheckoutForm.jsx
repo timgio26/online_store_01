@@ -2,8 +2,8 @@ import { useState } from "react";
 import { IoMdPin } from "react-icons/io";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { useForm } from "react-hook-form";
-import { getCart, getCartValue } from "../store";
-import { useSelector } from "react-redux";
+import { getCart, getCartValue,resetCart} from "../store";
+import { useSelector,useDispatch} from "react-redux";
 import { usePostOrderUser, useUpdate } from "../utils/useOrderApi";
 import { useNavigate, useNavigation } from "react-router";
 
@@ -21,6 +21,7 @@ export function CheckoutForm({ handleClose }) {
   const { postOrder, isPending } = usePostOrderUser();
   const navigate = useNavigate();
   const { updateOrder, isPending: isUpdating } = useUpdate();
+  const dispatch = useDispatch()
 
   function MapClick() {
     useMapEvents({
@@ -49,7 +50,7 @@ export function CheckoutForm({ handleClose }) {
             value: data[0].id,
             dataUpdate: { "order#": genId },
           });
-
+          dispatch(resetCart())
           navigate('/order',{ state: { newId: oriId }});
         },
       }

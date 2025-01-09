@@ -25,10 +25,13 @@ const cartSlice = createSlice({
       }
       item.qty = item.qty - 1;
     },
+    resetCart(state,action){
+      return initState;
+    }
   },
 });
 
-export const { addItem, addItemQty, redItemQty, deleteItem } =
+export const { addItem, addItemQty, redItemQty, deleteItem,resetCart} =
   cartSlice.actions;
 
 export const getCart = (state) => {
@@ -38,6 +41,10 @@ export const getCart = (state) => {
 export const getCartValue = (state) => {
   return state.cart.reduce((acum,curr)=>acum+(curr.qty*curr.unitPrice),0);
 };
+
+export function getCartQty(state){
+  return state.cart.reduce((acum,curr)=>acum+curr.qty,0)
+}
 
 ////store
 
