@@ -7,7 +7,9 @@ export function FindOrder() {
   const [order, setOrder] = useState("");
 
   const {isLoading,data,error,refetch} = useGetOrder2(order)
-  console.log(data)
+  // console.log(data)
+  // console.log(isLoading)
+  console.log(!error)
 
   function formCheckHandler(e) {
     let value = e.target.value;
@@ -62,8 +64,15 @@ export function FindOrder() {
             Submit
           </button>
         </form>
+        {error&&
+        <div className="flex justify-center mt-4">
+
+        <h1 className="text-red-700 font-medium">Error : order not found</h1>
+        </div>
+        
+        }
       </div>
-      {data&&
+      {data&&!error&&
       <OrderDetailCard data={data}/>
       }
     </div>
