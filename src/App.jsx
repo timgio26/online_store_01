@@ -17,6 +17,8 @@ import { OrderDetails } from "./pages/OrderDetails";
 import { Playground } from "./pages/Playground";
 import { FindOrder } from "./pages/FindOrder";
 import { MyCart } from "./pages/MyCart";
+import { Auth } from "./pages/Auth";
+import { ErrorEl } from "./pages/ErrorEl";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,23 +29,21 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-
-
   // const [count, setCount] = useState(0)
 
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-
         <BrowserRouter>
           <Routes>
-            <Route element={<AppLayout />}>
-              <Route path="/" element={<Catalog/>}/>
-              <Route path="/about" element={<About/>}/>
-              <Route path="/order" element={<OrderDetails/>}/>
-              <Route path="/findorder" element={<FindOrder/>}/>
-              <Route path="/playground" element={<Playground/>}/>
-              <Route path="/mycart" element={<MyCart/>}/>
+            <Route element={<AppLayout/>}>
+              <Route path="/" element={<Catalog/>} />
+              <Route path="/about" element={<About/>} />
+              <Route path="/order" element={<OrderDetails />} />
+              <Route path="/findorder" element={<FindOrder />} />
+              <Route path="/playground" element={<Playground />}/>
+              <Route path="/mycart" element={<MyCart />} />
+              <Route path="/auth" element={<Auth />}/>
             </Route>
           </Routes>
         </BrowserRouter>

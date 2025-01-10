@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { GetOrder, GetOrder2, PostOrder as PostOrderApi , UpdateOrder as UpdateOrderApi} from "./utils";
+import { GetOrder, GetOrder2, PostOrder as PostOrderApi , signup as signupApi,signin as signinApi, UpdateOrder as UpdateOrderApi} from "./utils";
+import { useState } from "react";
 
 export function usePostOrderUser(){
     const {mutate:postOrder,isPending}= useMutation({
@@ -43,4 +44,27 @@ export function useGetOrder2(id){
         enabled:false
     })
     return {isLoading,data,error,refetch}
+}
+
+export function useSignup() {
+    const [errMsg,setErrMsg]=useState("")
+  const {mutate: signup} = useMutation({
+    mutationFn: signupApi,
+    onError: (error) => setErrMsg(error.message),
+    onSuccess: () => console.log("sucess"),
+  });
+  return {signup,errMsg};
+}
+
+
+export function useSignIn() {
+    const [errMsg,setErrMsg]=useState("")
+  const {mutate: signin} = useMutation({
+    mutationFn: signinApi,
+    onError: (error) => setErrMsg(error.message),
+    onSuccess: (data) => {
+        sessionStorage.setItem("session",data.data.session)
+    },
+  });
+  return {signin,errMsg};
 }

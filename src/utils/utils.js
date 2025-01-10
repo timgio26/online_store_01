@@ -3,9 +3,7 @@ import { supabase } from "./supabase";
 
 // import {DATA_PER_PAGE} from '../utils/utils'
 
-
-
-export const DATA_PER_PAGE =20
+export const DATA_PER_PAGE = 20;
 
 export async function Feeddata() {
   const prodname = faker.commerce.productName();
@@ -47,34 +45,37 @@ export async function Feeddata() {
   return { data };
 }
 
-export async function GetData({sortBy,page=null}) {
-
-  const [col,how]=sortBy?sortBy.split("-"):["",""]
+export async function GetData({ sortBy, page = null }) {
+  const [col, how] = sortBy ? sortBy.split("-") : ["", ""];
   // console.log(col,how)
-  let q=supabase.from("db_produk").select("*", { count: 'exact', head: false });
+  let q = supabase
+    .from("db_produk")
+    .select("*", { count: "exact", head: false });
 
-  if(col&&how){
-    q=q.order(col,{ ascending: how==="asc" })
+  if (col && how) {
+    q = q.order(col, { ascending: how === "asc" });
     // console.log(col,how)
   }
-  if(page){
-    q=q.range((page-1)*DATA_PER_PAGE, page*DATA_PER_PAGE-1)
+  if (page) {
+    q = q.range((page - 1) * DATA_PER_PAGE, page * DATA_PER_PAGE - 1);
   } else {
-    q=q.range(0,DATA_PER_PAGE-1)
+    q = q.range(0, DATA_PER_PAGE - 1);
   }
 
-
-  const { data=[], error ,count} = await q
+  const { data = [], error, count } = await q;
   if (error) {
     console.error(error);
     throw new Error("items cant be loaded");
   }
-  console.log('count=',count)
-  return {count,data};
+  console.log("count=", count);
+  return { count, data };
 }
 
 export async function GetDataItem(id) {
-  let { data, error } = await supabase.from("db_produk").select("*").eq("id", id);
+  let { data, error } = await supabase
+    .from("db_produk")
+    .select("*")
+    .eq("id", id);
   if (error) {
     console.error(error);
     throw new Error("this item cant be loaded");
@@ -95,9 +96,9 @@ export async function PostOrder(orderUserData) {
 }
 
 export async function UpdateOrder(column, value, dataUpdate) {
-  console.log(column)
-  console.log(value,)
-  console.log(dataUpdate)
+  console.log(column);
+  console.log(value);
+  console.log(dataUpdate);
   const { data, error } = await supabase
     .from("db_order")
     .update(dataUpdate)
@@ -106,9 +107,12 @@ export async function UpdateOrder(column, value, dataUpdate) {
   return { data, error };
 }
 
-export async function GetOrder(id){
+export async function GetOrder(id) {
   // console.log(id)
-  let { data, error } = await supabase.from("db_order").select("*").eq("id", id);
+  let { data, error } = await supabase
+    .from("db_order")
+    .select("*")
+    .eq("id", id);
   if (error) {
     console.error(error);
     throw new Error("this item cant be loaded");
@@ -117,10 +121,13 @@ export async function GetOrder(id){
   return data[0];
 }
 
-export async function GetOrder2(id){
+export async function GetOrder2(id) {
   // console.log(id)
-  const col = "order#"
-  let { data, error } = await supabase.from("db_order").select("*").eq(`"${col}"`, id);
+  const col = "order#";
+  let { data, error } = await supabase
+    .from("db_order")
+    .select("*")
+    .eq(`"${col}"`, id);
   if (error) {
     console.error(error);
     throw new Error("this item cant be loaded");
@@ -128,7 +135,6 @@ export async function GetOrder2(id){
   // console.log(data)
   return data[0];
 }
-
 
 export function prettynum(num) {
   return (
@@ -145,9 +151,29 @@ export function prettynum(num) {
   );
 }
 
-export function isNumber(input){
-  const regex = /^\d+$/; 
-  return regex.test(input); 
+export function isNumber(input) {
+  const regex = /^\d+$/;
+  return regex.test(input);
 }
 
+export async function signup({ email, password, name }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { name } },
+  });
+  if (error) throw new Error(error.message);
+  return { data, error };
+}
 
+export async function signin({email,password}){
+  console.log(email)
+  console.log(password)
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
+  if (error) throw new Error(error.message);
+  return { data, error };
+  
+}

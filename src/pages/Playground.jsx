@@ -4,6 +4,7 @@ import { ScrollAnimation } from "../ui/ScrollAnimation";
 import { Status } from "../ui/Status";
 
 export function Playground() {
+  // error;
   return (
     <div className="w-svw">
         
