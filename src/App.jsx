@@ -19,6 +19,7 @@ import { FindOrder } from "./pages/FindOrder";
 import { MyCart } from "./pages/MyCart";
 import { Auth } from "./pages/Auth";
 import { Profile } from "./pages/Profile";
+import { PrivatePages } from "./pages/PrivatePages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,15 +37,31 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route element={<AppLayout/>}>
-              <Route path="/" element={<Catalog/>} />
-              <Route path="/about" element={<About/>} />
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<Catalog />} />
+              <Route path="/about" element={<About />} />
               <Route path="/order" element={<OrderDetails />} />
               <Route path="/findorder" element={<FindOrder />} />
-              <Route path="/playground" element={<Playground />}/>
+
+              <Route
+                path="/playground"
+                element={
+                  <PrivatePages>
+                    <Playground />
+                  </PrivatePages>
+                }
+              />
+
               <Route path="/mycart" element={<MyCart />} />
-              <Route path="/auth" element={<Auth />}/>
-              <Route path="/profile" element={<Profile/>}/>
+              <Route path="/auth" element={<Auth />} />
+              <Route
+                path="/profile"
+                element={
+                  <PrivatePages>
+                    <Profile />
+                  </PrivatePages>
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

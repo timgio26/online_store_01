@@ -1,33 +1,25 @@
 import { useNavigate } from "react-router";
-import { useGetUser, useSignout } from "../utils/useOrderApi";
-import { useEffect } from "react";
+import { useSignout } from "../utils/useOrderApi";
 
 export function Profile() {
-  const { isLoading, data = {}, error } = useGetUser();
   const { signout } = useSignout();
   const nav = useNavigate();
+  const data = localStorage.getItem("sb-dzanjlfmchzdirukrrlt-auth-token")
+  const user = JSON.parse(data).user.user_metadata
 
-  useEffect(() => {
-    if (!isLoading && !data.user) {
-        // console.log(!data.user)
-      nav("/auth");
-    }
-  }, [data, nav, isLoading]);
 
   function handleLogout() {
-    // console.log('signout');
     signout();
     nav('/auth')
   }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
-  const user_metadata = data.user?.user_metadata;
 
   return (
-    <div className="bg-slate-400 w-full">
-      <span>{user_metadata?.email}</span>
+    <div className="bg-slate-400 w-full flex flex-col">
+      <h1 className="text-xl font-bold">Hi, {user.name.toUpperCase()}</h1>
+      <span>{user.email}</span>
+      {/* <span>{user_metadata?.email}</span> */}
       <button className="bg-red-400" onClick={handleLogout}>
         signout
       </button>

@@ -63,9 +63,9 @@ export function useSignIn() {
   const { mutate: signin } = useMutation({
     mutationFn: signinApi,
     onError: (error) => setErrMsg(error.message),
-    onSuccess: (data) => {
-      sessionStorage.setItem("session", JSON.stringify(data.data.session));
-    },
+    // onSuccess: (data) => {
+    //   sessionStorage.setItem("session", JSON.stringify(data.data.session));
+    // },
   });
   return { signin, errMsg };
 }
