@@ -1,12 +1,14 @@
 import { useState } from "react";
-import {useSignIn, useSignup} from '../utils/useOrderApi'
+import { useSignIn, useSignup} from '../utils/useOrderApi'
+import { useNavigate } from "react-router";
 
 export function Auth() {
   const [isRegist, setIsRegist] = useState(false);
 
   const { signup, errMsg: errMsgRegist } = useSignup();
   const { signin, errMsg: errMsgSignIn } = useSignIn();
-  // console.log(errMsg)
+
+  const nav = useNavigate()
 
 
   function handleRegist(e){
@@ -18,7 +20,7 @@ export function Auth() {
   function handleSignIn(e){
     e.preventDefault()
     const {email,password} = e.target
-    signin({email:email.value,password:password.value})
+    signin({email:email.value,password:password.value},{onSuccess:()=>nav('/')})
   }
 
   return (

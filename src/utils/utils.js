@@ -167,8 +167,6 @@ export async function signup({ email, password, name }) {
 }
 
 export async function signin({email,password}){
-  console.log(email)
-  console.log(password)
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password
@@ -176,4 +174,15 @@ export async function signin({email,password}){
   if (error) throw new Error(error.message);
   return { data, error };
   
+}
+
+export async function getuser(){
+  const { data: { user } } = await supabase.auth.getUser()
+  return { user };  
+}
+
+export async function signout(){
+  let { error } = await supabase.auth.signOut()
+  if(error)console.log(error.message)
+  return {error}
 }

@@ -23,9 +23,11 @@ export function MobileFooter() {
           }
         </div>
       </Link>
+      <Link to={'/profile'}>
       <div>
         <IoMdPerson className="text-primary-500" size={20} />
       </div>
+      </Link>
       {/* <div></div> */}
     </div>
   );

@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { GetOrder, GetOrder2, PostOrder as PostOrderApi , signup as signupApi,signin as signinApi, UpdateOrder as UpdateOrderApi} from "./utils";
+import { GetOrder, GetOrder2, PostOrder as PostOrderApi ,UpdateOrder as UpdateOrderApi,
+     signup as signupApi,signin as signinApi,getuser as getuserApi, signout as signoutApi} from "./utils";
 import { useState } from "react";
 
 export function usePostOrderUser(){
@@ -58,13 +59,29 @@ export function useSignup() {
 
 
 export function useSignIn() {
-    const [errMsg,setErrMsg]=useState("")
-  const {mutate: signin} = useMutation({
+  const [errMsg, setErrMsg] = useState("");
+  const { mutate: signin } = useMutation({
     mutationFn: signinApi,
     onError: (error) => setErrMsg(error.message),
     onSuccess: (data) => {
-        sessionStorage.setItem("session",data.data.session)
+      sessionStorage.setItem("session", JSON.stringify(data.data.session));
     },
   });
-  return {signin,errMsg};
+  return { signin, errMsg };
+}
+
+export function useGetUser(){
+    const {isLoading,data,error} = useQuery({
+        queryFn: getuserApi,
+        queryKey: ['user']
+    })
+    return {isLoading,data,error}
+}
+
+export function useSignout(){
+    // console.log('signout')
+    const {mutate:signout} = useMutation({
+        mutationFn:signoutApi
+    })
+    return {signout}
 }
