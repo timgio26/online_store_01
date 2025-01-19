@@ -30,7 +30,7 @@ function Image2() {
     <motion.img
       src={rocket}
       className="z-10 absolute w-9 left-1/2 bottom-1/2"
-      whileInView={{translateY:-150, transition:{duration:3}}}
+      whileInView={{translateY:-25, transition:{duration:3}}}
     />
   );
 }

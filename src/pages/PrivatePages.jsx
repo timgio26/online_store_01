@@ -8,6 +8,11 @@ export function PrivatePages({children}){
     const nav=useNavigate()
     const { isLoading, data = {}, error } = useGetUser();
 
+    console.log('isloading',isLoading)
+    console.log('data',data)
+    console.log('error',error)
+
+
     useEffect(()=>{
         if(!isLoading && !error && data?.user===null) nav('/auth')
     },[isLoading,error,data,nav])
