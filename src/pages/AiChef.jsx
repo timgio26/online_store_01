@@ -1,17 +1,23 @@
 import { useState } from 'react';
 import { fetchAiResponse } from '../utils/ai';
 import Markdown from 'react-markdown'
+import { messages } from '../utils/ai';
 
 export function AiChef(){
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [loading,setLoading] =useState(false)
 
+//   console.log()
+  
+
   const handleSubmit = async (e) => {
+    console.log(messages)
     setLoading(true)
     e.preventDefault();
-    const result = await fetchAiResponse(inputText);
-    setOutputText(result);
+    const {respContent} = await fetchAiResponse({inputText,step:1});
+    setOutputText(respContent);
+    setInputText("")
     setLoading(false)
   };
 
@@ -27,7 +33,7 @@ export function AiChef(){
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           className="border border-gray-300 rounded p-2 w-80"
-          placeholder="Ask me about a recipe..."
+          placeholder={messages.filter((each)=>each.role==="assistant").slice(-1)[0].content}
         />
         <button
           type="submit"

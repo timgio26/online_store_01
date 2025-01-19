@@ -16,11 +16,11 @@ export function Header() {
             Home
           </Link>
         </li>
-        <li>
+        {/* <li>
           <a href="/products" className="hover:text-gray-300">
             Products
           </a>
-        </li>
+        </li> */}
         <li>
           <Link to="/about" className="hover:text-gray-300">
             About

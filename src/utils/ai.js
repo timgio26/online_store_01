@@ -7,22 +7,50 @@ const client = new OpenAI({
   });
 
 
+export const messages = [
+  {
+    role: "system",
+    content: `Conversational AI that generates recipes.
+    please expect user input is containing ingredient and consider if user dietary preference 
+    otherwise make validUserInput falsy your response must be in JSON format with 
+    this type {content : string , validUserInput : boolean`,
+  },
+  { role: "assistant", content: "Please list all the ingredients you have." },
+];
 
-export const fetchAiResponse = async (inputText) => {
+
+
+export async function fetchAiResponse({inputText,step}){
+  
   try {
-    console.log(inputText)
+    messages.push({ role: "user", content: inputText })
+     
+
     const response =await client.chat.completions.create({
-        messages:[{ role:"user", content: inputText }],
+        messages:messages,
         model: "gpt-4o",
         temperature: 1,
         max_tokens: 4096,
         top_p: 1
     })
-    console.log(response)
-    const outputText=response.choices[0].message.content
-    return outputText;
+    
+    const respContentRaw=response.choices[0].message.content
+    const {content:respContent,validUserInput}=JSON.parse(respContentRaw)
+
+    if (validUserInput) {
+        messages.push({
+        role: "assistant",
+        content: step===1&&"Do you have any dietary restrictions?",
+      });
+    } else {
+      messages.pop();
+    }
+    
+    return {respContent};
+
+
   } catch (error) {
-    console.error("Error generating text:", error);
-    return "Sorry, I couldn’t generate a response. Please try again.";
+    // console.error("Error generating text:", error);
+    return {respContent:"Sorry, I couldn’t generate a response. Please try again."};
   }
 };

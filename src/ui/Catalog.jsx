@@ -10,6 +10,13 @@ import { Paginate } from "./Paginate";
 import { useMemo } from "react";
 import { LoadingContainer } from "./LoadingContainer";
 
+import { Carousel } from "./Carousel";
+
+const OPTIONS = { dragFree: true, loop: true }
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
+
 //Projectandi26!
 
 export function Catalog() {
@@ -33,13 +40,14 @@ export function Catalog() {
   return (
     // <div className="flex flex-row h-svh overflow-y-auto">
     <>
-      <div className="bg-primary-200 hidden md:flex md:flex-col justify-between w-72">
+      <div className="bg-primary-100 hidden md:flex md:flex-col justify-between w-72">
         <Sidecart />
         <BasicModal />
       </div>
-      <div className="bg-primary-100 flex-1 px-1 md:px-10 py-5 overflow-scroll">
+      <div className="flex-1 px-1 md:px-10 py-2 overflow-scroll">
+        <Carousel slides={SLIDES} options={OPTIONS} />
         <Sort />
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-1 md:gap-3">
           {!isLoading ? (
             db_produk_memo.map((each) => <ItemCard key={each.id} data={each} />)
           ) : (

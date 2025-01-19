@@ -8,9 +8,9 @@ export function PrivatePages({children}){
     const nav=useNavigate()
     const { isLoading, data = {}, error } = useGetUser();
 
-    console.log('isloading',isLoading)
-    console.log('data',data)
-    console.log('error',error)
+    // console.log('isloading',isLoading)
+    // console.log('data',data)
+    // console.log('error',error)
 
 
     useEffect(()=>{
